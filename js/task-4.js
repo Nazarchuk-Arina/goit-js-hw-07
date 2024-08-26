@@ -12,6 +12,6 @@ function handleSubmit(event) {
     password: passwordEl,
   };
   console.log("data:", data);
-  reset();
+  formEl.reset();
 }
 formEl.addEventListener("submit", handleSubmit);

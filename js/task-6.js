@@ -5,13 +5,16 @@ const boxEl = document.querySelector("#boxes");
 
 function createBoxes(amount) {
   boxEl.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
   for (let index = 0; index < amount; index++) {
     const box = document.createElement("div");
     box.style.width = `${30 + index * 10}px`;
     box.style.height = `${30 + index * 10}px`;
     box.style.backgroundColor = getRandomHexColor();
-    boxEl.append(box);
+    fragment.append(box);
   }
+  boxEl.append(fragment);
 }
 
 function getRandomHexColor() {
@@ -25,8 +28,14 @@ function destroyBoxes() {
 }
 
 createBtn.addEventListener("click", () => {
-  const amount = inputEl.value;
-  if (amount > 0 && amount <= 100) {
+  const amount = inputEl.value.trim();
+
+  if (
+    amount === "" ||
+    isNaN(amount) ||
+    Number(amount) > 0 ||
+    Number(amount) <= 100
+  ) {
     createBoxes(amount);
   } else {
     alert("Please enter a valid number between 1 and 100.");
